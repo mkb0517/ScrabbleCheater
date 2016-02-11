@@ -1,18 +1,23 @@
-#!/bin/bash
-# scrabble cheating program!
-# feed it your tiles and get a list of words you can use!
+# scrabble cheating program
+# feed it your tiles and get the list of words you can use
 cheat() {
-  local tiles="$1"    # The string of tiles you want to permute.
-  local combs="$2"    # Every single permutation. Every. One.
-  local i             # index of the tiles to include in permutation.
+  local tiles="$1"
+  local combs="$2"
+  local i
   [[ "$tiles" == "" ]] && echo "$combs" && return
   for (( i=0; i<${#tiles}; i++ ))
     do
-      cheat "${tiles:0:i}${tiles:i+1}" "$combs${tiles:i:1}"
+    if test ${#combs} -ne 1
+    then
+      echo $combs
+    fi
+    cheat "${tiles:0:i}${tiles:i+1}" "$combs${tiles:i:1}"
     done
-}
-echo Please enter your tiles all at once
+  }
+echo Please enter the tiles you have
 read line
-cheat $line
+cheat $line > Scrabble.txt
 
-# Currently only generates permutations equal to the number of tiles you enter
+cat Scrabble.txt | tr ' ' '\n' | sort | uniq > checkrack.txt
+echo The legal words you can make are:
+comm -12 checkrack.txt scrabble.dict
