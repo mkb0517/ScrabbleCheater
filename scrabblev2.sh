@@ -27,10 +27,9 @@ do
     echo "You may only have 7 tiles. Enter your rack:"
     read line
 done
-for (( i=0; i<${#tiles}; i++ ))
+for (( i=0; i<${#line}; i++ ))
 do
-  qm = '?'
-  if "${line:i:1}" -eq "\?"
+  if test "${line:i:1}" == '?'
   then
     for (( j=97; j<123; j++ ))
     do
