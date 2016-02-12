@@ -29,17 +29,25 @@ do
 done
 for (( i=0; i<${#line}; i++ ))
 do
-  if test "${line:i:1}" == '?'
-  then
+  if [ "${line:i:1}" = \? ]
+  then 
+    if [ "${line:i:1}" = \? ]
+    then
+      for (( j=97; j<123; j++ ))
+      do
+        c=`printf "\x$(printf %x $j)"`
+        cheat ${line/\?/$c} >> Scrabble.txt
+      done
+    else
     for (( j=97; j<123; j++ ))
     do
       c=`printf "\x$(printf %x $j)"`
       cheat ${line/\?/$c} >> Scrabble.txt
     done
-  else
-    cheat $line > Scrabble.txt
+    fi
   fi
 done
+# cheat $line > Scrabble.txt
 
 cat Scrabble.txt | tr ' ' '\n' | sort | uniq > checkrack.txt
 echo The legal words you can make are:
