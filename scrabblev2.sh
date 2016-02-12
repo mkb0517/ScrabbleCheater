@@ -27,10 +27,13 @@ do
     echo "You may only have 7 tiles. Enter your rack:"
     read line
 done
+
+hasQ=0
 for (( i=0; i<${#line}; i++ ))
 do
   if [ "${line:i:1}" = \? ]
-  then 
+  then
+    hasQ=1
     if [ "${line:i:1}" = \? ]
     then
       for (( j=97; j<123; j++ ))
@@ -47,7 +50,10 @@ do
     fi
   fi
 done
-# cheat $line > Scrabble.txt
+if [ $hasQ -eq 0 ]
+then
+  cheat $line >> Scrabble.txt
+fi
 
 cat Scrabble.txt | tr ' ' '\n' | sort | uniq > checkrack.txt
 echo The legal words you can make are:
