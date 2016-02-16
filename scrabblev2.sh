@@ -6,7 +6,7 @@ cheat() {
   local combs="$2"
   local i
   [[ "$tiles" == "" ]] && echo "$combs" && return
-  for (( i=0; i<${#tiles}; i++ )) 
+  for (( i=0; i<${#tiles}; i++ ))
     do
     if test ${#combs} -ne 1
     then
@@ -31,22 +31,25 @@ hasQ=0
 for (( i=0; i<${#line}; i++ ))
 do
   if [ "${line:i:1}" = \? ]
-  then 
+  then
     hasQ=1
-    if [ "${line:i:1}" = \? ]
-    then
-      for (( k=97; k<123; k++ ))
-      do
-        d=`printf "\x$(printf %x $k)"`
-        cheat ${line/\?/$d} >> Scrabble.txt
-      done
-    else
     for (( j=97; j<123; j++ ))
     do
       c=`printf "\x$(printf %x $j)"`
+      rack=${line/\?/$c}
+      for (( k=0; k<${#rack}; k++ ))
+      do
+        if [ "${rack:k:1}" = \? ]
+        then
+          for (( l=97; l<123; l++ ))
+          do
+            d=`printf "\x$(printf %x $l)"`
+            cheat ${rack/\?/$d} >> Scrabble.txt
+          done
+        fi
+      done
       cheat ${line/\?/$c} >> Scrabble.txt
     done
-    fi
   fi
 done
 if [ $hasQ -eq 0 ]
