@@ -6,7 +6,7 @@ cheat() {
   local combs="$2"
   local i
   [[ "$tiles" == "" ]] && echo "$combs" && return
-  for (( i=0; i<${#tiles}; i++ ))
+  for (( i=0; i<${#tiles}; i++ )) 
     do
     if test ${#combs} -ne 1
     then
@@ -16,10 +16,9 @@ cheat() {
     done
 }
 
-if [ ! -f Scrabble.txt ]
-then
-  echo "" > Scrabble.txt
-fi
+# clear the Scrabble.txt file
+echo "" > Scrabble.txt
+
 echo Please enter the tiles you have
 read line
 while [ ${#line} -gt 7 ]
@@ -32,14 +31,14 @@ hasQ=0
 for (( i=0; i<${#line}; i++ ))
 do
   if [ "${line:i:1}" = \? ]
-  then
+  then 
     hasQ=1
     if [ "${line:i:1}" = \? ]
     then
-      for (( j=97; j<123; j++ ))
+      for (( k=97; k<123; k++ ))
       do
-        c=`printf "\x$(printf %x $j)"`
-        cheat ${line/\?/$c} >> Scrabble.txt
+        d=`printf "\x$(printf %x $k)"`
+        cheat ${line/\?/$d} >> Scrabble.txt
       done
     else
     for (( j=97; j<123; j++ ))
