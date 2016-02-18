@@ -2,7 +2,7 @@
 # scrabble cheating program
 # feed it your tiles and get the list of words you can use
 cheat() {
-# declares variables tiles and combs and i
+# declares variables: tiles assigned to $1, combs assigned to $2, and i 
 # local, I would assume part of the function cheat()
   local tiles="$1"
   local combs="$2"
@@ -24,7 +24,7 @@ cheat() {
 # checks if file Scrabble.txt is an ordinary file 
 if [ ! -f Scrabble.txt ]
 then
-# writes to Scrabble.txt
+# checks if Scrabble.txt is empty?
   echo "" > Scrabble.txt
 fi
 
