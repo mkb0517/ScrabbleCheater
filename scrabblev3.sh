@@ -27,9 +27,10 @@ cheat() {
     else
       if test $i -eq ${#tiles}
       then
-        cheat "${tiles:0:i-1}${tiles:i}" "$combs$sub" "$slen" "$sub"
+        cheat "${tiles:0:i-1}${tiles:i}" "$combs$sub" "0" ""
       else
         cheat "${tiles:0:i}${tiles:i+1}" "$combs${tiles:i:1}" "$slen" "$sub"
+        cheat "${tiles:0:i}${tiles:i+1}" "$sub$combs${tiles:i:1}" "0" ""
       fi
     fi
     done
