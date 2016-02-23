@@ -2,14 +2,6 @@
 # scrabble cheating program
 # feed it your tiles and get the list of words you can use
 
-# Declare local variables for the question mark check
-local i
-local j
-local k
-local l
-local c
-local d
-
 cheat() {
   # assign variables to the local working directory of the user to speed up calculations significantly
   local tiles="$1"        # variable to store the user input
@@ -74,8 +66,8 @@ done
 slen="${#sub}"
 
 # create a variable to check if there are question marks in the string
-local hasQ=0
-local has2Q=0
+hasQ=0
+hasQQ=0
 # look through the string to find question marks
 for (( i=0; i<${#line}; i++ ))
 do
@@ -98,7 +90,7 @@ do
         # check the string for a ? at the index 
         if [ "${rack:k:1}" = \? ]
         then
-          has2Q=1
+          hasQQ=1
           # Repeat the character replacement for a ?
           for (( l=97; l<123; l++ ))
           do
@@ -108,7 +100,7 @@ do
           done
         fi
       done
-      if [ $has2Q -eq 0 ]
+      if [ $hasQQ -eq 0 ]
       then
         # Call the cheat function for our modified rack of tiles that had 1 ?. Append the permutations to Scrabble.txt
         cheat "${line/\?/$c}" "" "$slen" "$sub" >> Scrabble.txt
