@@ -45,7 +45,7 @@ cheat() {
 echo "" > Scrabble.txt
 
 # Tell the user to input their tiles
-echo "Please enter the tiles you have. Use \? for blank tiles"
+echo "Please enter the tiles you have. Use ? for blank tiles"
 # Get the tile input from the user
 read line
 while [ ${#line} -gt 7 ]
